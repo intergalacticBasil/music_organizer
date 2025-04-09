@@ -1,12 +1,18 @@
 beets==2.2.0
+certifi==2025.1.31
+charset-normalizer==3.4.1
 confuse==2.0.1
 filetype==1.2.0
+idna==3.10
 jellyfish==1.2.0
 mediafile==0.13.0
 munkres==1.1.4
+-e git+ssh://git@github.com/intergalacticBasil/music_organizer.git@5dc24f50ae4706021a019c4744fe9bfa228e565a#egg=music_organizer
 musicbrainzngs==0.7.1
 mutagen==1.47.0
 platformdirs==4.3.7
 PyYAML==6.0.2
+requests==2.32.3
 Unidecode==1.3.8
+urllib3==2.3.0
 watchdog==6.0.0
