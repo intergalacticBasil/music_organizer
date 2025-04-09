@@ -1,7 +1,3 @@
-"""
-Configuration handling for the music organizer.
-"""
-
 import os
 from pathlib import Path
 
