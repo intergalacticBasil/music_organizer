@@ -32,8 +32,8 @@ import:
 
 paths:
   default: %if{$label,$label,_unknown}/$year %if{$albumartists,$albumartists,$albumartist} - $album/$track $title
-  singleton: $label/$year $artist - $title/$track $title
-  comp: $label/$year VA - $album/$track $artist - $title
+  singleton: %if{$label,$label,_unknown}/$year $artist - $title/$track $title
+  comp: %if{$label,$label,_unknown}/$year VA - $album/$track $artist - $title
 
 va_name: "VA"
 
