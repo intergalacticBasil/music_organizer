@@ -5,12 +5,12 @@ A tool to automatically organize music albums using **Beets**.
 
 ## Features
 
-- Processes albums with **Beets** to extract accurate metadata
-- Organizes albums into smart, clean folder structures using the following rule:
+- Processes albums with **Beets** to extract metadata
+- Organizes albums into clean folder structure using the following rule:
   ```
-  $label/$year $albumartist - $album/$track $title
+  $label/$year $albumartists - $album/$track $title
   ```
-- Sorts albums into record label folders (uses `_` if no label exists)
+- Sorts albums into record label folders (uses `_unknown` if no label exists)
 - Embeds album artwork automatically
 - Robust matching and tagging based on MusicBrainz metadata
 
@@ -23,6 +23,7 @@ This tool requires a beets configuration file at `~/.config/beets/config.yaml`. 
 ```yaml
 directory: ~/Music
 library: ~/Music/library.db
+original_date: yes
 
 import:
   move: yes
@@ -30,11 +31,28 @@ import:
   autotag: yes
 
 paths:
-  default: $label/$year $albumartist - $album/$track $title
+  default: %if{$label,$label,_unknown}/$year %if{$albumartists,$albumartists,$albumartist} - $album/$track $title
   singleton: $label/$year $artist - $title/$track $title
-  comp: $label/$year VA - $album/$track $title
+  comp: $label/$year VA - $album/$track $artist - $title
+
+va_name: "VA"
+
+replace:
+    '_␀': ', '
+    '[\\/]': _
+    '^\.': _
+    '[\x00-\x1f]': _
+    '[<>:"\?\*\|]': _
+    '\.$': _
+    '\s+$': ''
+    '^\s+': ''
+    '^-': _
 
 plugins: embedart fetchart
+
+musicbrainz:
+    source_weight: 1.0
+    extra_tags: [year, catalognum, country, label]
 
 fetchart:
   sources: filesystem coverart
